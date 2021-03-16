@@ -1,6 +1,8 @@
 
 
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+
 import Button from '../../components/Layout/UI/Button/Button'
 import classes from'./ContactData.css'
 import axios from '../../axios-orders'
@@ -24,7 +26,7 @@ class ContactData extends Component {
         event.preventDefault()
                this.setState({loading:'true'})
             const order={
-                ingredients: this.props.ingredients,
+                ingredients: this.props.ing,
                 totalPrice: this.props.price,
                 customer:{
                     name: 'Areej Anjum',
@@ -60,6 +62,7 @@ class ContactData extends Component {
                 <Input inputtype="text" type="email" name="email" placeholder="Your Mail" />
                 <Input inputtype="text" type="text" name="street" placeholder="Street" />
                 <Input inputtype="text" type="text" name="postal" placeholder="Postal Code" />
+                
                 <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
             </form>
         );
@@ -75,4 +78,11 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+
+const mapStateToProps= (state)=>{
+    return{
+        ing: state.ingredients
+    }
+}
+
+export default connect(mapStateToProps)(ContactData);

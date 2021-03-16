@@ -1,33 +1,13 @@
 import React, { Component, Fragment} from 'react'
 import {withRouter, Route} from 'react-router-dom'
+import {connect} from 'react-redux'
+
 
 import CheckoutSummary from '../../components/checkoutSummary/checkoutSummary'
 import ContactData from "../../container/ContactData/ContactData"
 
 class Checkout extends Component{
 
-    state={
-        ingredients:null,
-        price: 0
-    }
-
-    //it will load before mount so we will nt get error that ingredients not loaded
-    componentWillMount() {
-
-        //decoding ingredients sent by burgerBuliderjs
-        const query = new URLSearchParams(this.props.location.search);
-        const ingredients = {};
-        let price;
-        for (let param of query.entries()) {
-            // ['salad', '1']
-            if (param[0]==="price"){
-                price= param[1]
-            }
-            else
-            ingredients[param[0]] = +param[1];
-        }
-        this.setState({ingredients: ingredients, totalPrice: price });
-    }
 
 
     checkoutCancelHandler=()=>{
@@ -44,15 +24,22 @@ class Checkout extends Component{
     <CheckoutSummary
      checkoutCanceled={this.checkoutCancelHandler}
      checkoutContinued={this.checkoutContinueHandler}
-     ingredients={this.state.ingredients} />
+     ingredients={this.props.ing} />
       <Route 
     path={this.props.match.path + '/contact-form'} 
-    render={(props) => (<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice} {...props} />)} />
-         
-</Fragment>
+    ><ContactData/></Route>         
+ 
+ </Fragment>
        )
    }
 }
 //{...props} are used to access routes props in ContactData
 
-export default withRouter(Checkout);
+
+const mapStateToProps=(state)=>{
+    return{
+        ing: state.ingredients
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Checkout));

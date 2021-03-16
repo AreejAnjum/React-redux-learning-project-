@@ -19,12 +19,12 @@ const BuildControls = (props) => (
             <BuildControl
                 key={ctrl.label}
                 label={ctrl.label}
-                added={() => {
+                added={() => 
                     props.addedIngre(ctrl.type)
-                }}
-                remove={() => {
+                }
+                remove={() => 
                     props.removeIngre(ctrl.type)
-                }}
+                }
                         // { salad: false, cheese: true}
                         // disabled['salad']
                 disabled={props.disabled[ctrl.type]}
