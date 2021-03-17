@@ -1,6 +1,6 @@
 
 import React, {Fragment} from 'react'
-import * as actionTypes from '../../store/action/actionTypes/actionTypes'
+import * as actionTypes from './action/actionTypes/actionTypes'
 
 const initialState={
     ingredients: null,      
@@ -43,7 +43,15 @@ const burgerBuilderReducer = (state= initialState, action) => {
     case actionTypes.SET_INGREDIENTS:
         return{
             ...state,
-            ingredients: action.ingredients,
+            ingredients:{
+                // to set the ingredient like they in the sequence
+                salad: action.ingredients.salad,
+                bacon: action.ingredients.bacon,
+                cheese: action.ingredients.cheese,
+                meat: action.ingredients.meat
+ 
+            },
+            
             error: false
         }
 

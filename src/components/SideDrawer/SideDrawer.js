@@ -17,7 +17,7 @@ return(
         <div>
         <Backdrop purchasing={props.backDropClicked}  backDropClicked={props.backDropClosed}></Backdrop>
 
-        <div className={attachedClasses.join(' ')}>
+        <div className={attachedClasses.join(' ')} onClick={props.backDropClosed}>
             <div className={classes.Logo}><Logo/></div>           
             <nav><NavigationItems/></nav>        
             </div>

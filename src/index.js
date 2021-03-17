@@ -10,11 +10,12 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import App from './App';
 import reducer from '../src/store/reducers/reducer'
-import burgerBuilderReducer from '../src/store/reducers/burgerBuilderReducer'
+import burgerBuilderReducer from './store/burgerBuilderReducer'
 
 
 //from github repo
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//now redux dev tools will be in just development mode
+const composeEnhancers = process.env.NODE_ENV=== 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__:null || compose;
 
 
 //best place to make store is the root file, then pass middleware and reducer in store
